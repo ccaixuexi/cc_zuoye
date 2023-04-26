@@ -1,0 +1,4 @@
+npm install lodash --save 
+之后会在package.json创建一个dependencies
+dependencies  存放生产环境下的第三方依赖 
+如果有的依赖只希望它作用于本地开发  开发环境 devDependencies 存放开发环境下的第三方依赖

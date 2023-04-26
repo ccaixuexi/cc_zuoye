@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script type="module">  //记得这里加type的类型为module
+        import { a, b } from './2-1.a.js'  //记得不管是export还是import，后面跟的都是大括号而不是小括号  //记得这里的from地址是/，而终端里的node的地址是\
+        import fn from './2-1.a.js'  //在默认导入的情况下 可以任意指定导入的名称(这里不一定非得用fn表示)   这里导入的可以用函数名代表这个函数  
+        import { c, b as _b } from './2-1.b.js'
+        console.log(a, c, b, _b);
+        console.log(fn(), a, b); //这里输出的函数记得不是用函数名，函数名不代表调用这个函数，后面记得加括号
+    </script>
+
+    <script type="module">
+        // import(a,b) from '.\2-1.a.js'  这里应该是大括号而不是小括号，引入的地址应该是/而不是\
+        import{a,b} from './2-1.a.js'
+        // import default fn    只有在默认导出一个函数的时候才是export default fn，import是一样的
+        import fn from './2-1.a.js'
+        import{c,b as _b} from './2-1.b.js'
+        console.log(a,c,b,_b);
+        // console.log(fn);  这里打印的是fn这个函数，因为没有加()，所以没有调用fn这个函数，所以就没有打印返回值
+        console.log(fn());
+    </script>
+</body>
+
+</html>

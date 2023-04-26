@@ -1,0 +1,68 @@
+
+
+//本地仓库的命令
+
+1.设置用户信息
+git config --global user.name <username>
+git config --global user.email <mailaddress>
+
+2.初始化本地仓库
+git init
+
+3.将工作区需要追踪的文件添加到暂存区
+git add 文件名
+
+4.查看文件状态
+git status
+
+5.提交本地仓库
+git commit -m '备注'
+
+6.查看本地仓库的历史版本信息
+git log
+
+7.从暂存区中找回删除的文件
+git checkout 文件名
+
+8.从git管理中彻底删除文件
+git rm 文件名
+
+9.回溯到指定版本号的历史版本
+git reset --hard '通过git log查找到的历史版本号'
+
+10.可以查看整个回溯版本的历史信息
+git reflog
+
+11.在.gitignore中配置不被git追踪的文件
+
+12.添加远程仓库
+git remote add 远程仓库的别名 远程仓库的http地址
+
+13.查看远程仓库
+git remote
+
+14.把本地仓库里的内容推送给远程仓库origin下默认的master分支
+git push origin master
+
+
+//远程仓库的命令
+15.拉取别人的仓库
+git clone
+
+16.拉取自己的仓库
+必须保持远程仓库和本地仓库的一致性  //就是先从远程库里面先pull一下保持本地和远程仓库代码的一致性，再在本地仓库进行修改最后push到远程库里
+git pull --rebase '远程仓库的地址'
+再git push origin master
+
+17.查看分支
+git branch
+
+18.新增分支
+git branch 分支名
+
+19. 切换分支
+git checkout 分支名称
+
+20.合并分支
+切换到主分支 
+git merge 分支名称
