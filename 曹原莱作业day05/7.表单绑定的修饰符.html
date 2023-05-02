@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- lazy修饰符可以让双向数据绑定监听的事件变成change，默认是监听input事件 -->
+        <input type="text" v-model.lazy="msg">
+        <!-- input中收集到的输入内容默认为字符串类型，如果希望变成数字类型 可以添加.number修饰符 -->
+        <input type="text" v-model.number="number">
+        <!-- 希望去掉搜集到的表单元素前后的空格，可以使用.trim修饰符，去掉字符串前后空格 -->
+        <input type="text" v-model.trim="info">
+        <h3>{{msg}}</h3>
+        <h3>{{number+10}}</h3>
+        <h3>{{info}}</h3>
+    </div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                msg:'hello',
+                number:0,
+                info:'info'
+            },
+        })
+
+    </script>
+</body>
+</html>

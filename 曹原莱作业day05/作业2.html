@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            background: rgb(84, 164, 263);
+            background-image: url(./jiguang.jpg);
+            background-size: cover;
+        }
+
+        #app {
+            margin: 0 auto;
+            margin-top: 120px;
+            padding: 20px;
+            width: 80%;
+            height: 300px;
+        }
+
+        .inputbox {
+            display: flex;
+            justify-content: space-between;
+            margin: 0 auto;
+            padding: 20px;
+            width: 40%;
+            text-align: center;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.123);
+            border-radius: 6px;
+        }
+
+        .text {
+            width: 300px;
+            height: 35px;
+            border-radius: 15px;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom: 2px solid rgb(156, 154, 154);
+        }
+
+        .addbtn {
+            width: 100px;
+            height: 40px;
+            color: white;
+            background: rgb(40, 179, 225);
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nothing {
+            margin: 0 auto;
+            margin-top: 120px;
+            padding: 20px;
+            width: 40%;
+            background: white;
+            border-radius: 6px;
+            font-weight: 700;
+        }
+
+        .todolist {
+            margin: 0 auto;
+            margin-top: 120px;
+            padding: 20px;
+            width: 40%;
+            background: white;
+            border-radius: 6px;
+            font-weight: 700;
+        }
+
+        .todoitem {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px;
+            border-bottom: 1px solid lightgray;
+        }
+
+        .del {
+            width: 40px;
+            height: 30px;
+            background: rgb(40, 179, 225);
+            color: white;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .totalbox {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .clearall {
+            width: 60px;
+            height: 30px;
+            background: rgb(40, 179, 225);
+            color: white;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 添加区 -->
+    <div id="app">
+        <div class="inputbox">
+            <input type="text" class="text" v-bind:placeholder="place" @blur="blurinput" @click="placeholder"
+                v-model.trim="thing"><!-- v-show="!inputshow" -->
+            <!-- <input type="text" class="text" v-model.trim="thing" v-show="inputshow" > -->
+            <button class="addbtn" @click="add">添加</button>
+        </div>
+
+        <!-- 无事区 -->
+        <div class="nothing" v-show="!ishow">
+            <p>暂无代办事项</p>
+        </div>
+
+        <!-- 待办区 -->
+        <div class="todolist" v-show="ishow">
+            <div class="todoitem" v-for="(item,index) in items">
+                <!-- <input type="text" v-bind:value="item"><button @click="del(index)" class="del">点我删除这条数据</button> -->
+                <span v-show="spanishow" @click="span">{{item}}</span>
+                <input type="text" v-model="items[index]" v-show="!spanishow" @blur="blur">
+                <button @click="del(index)" class="del" v-show="spanishow">删除</button>
+                <!-- {{item}}<button @click="del(index)" class="del">点我删除这条数据</button> -->
+            </div>
+            <div class="totalbox">
+                <span>共计待办任务{{items.length}}项</span><button @click="clear" class="clearall" v-show="ishow">全部清除</button>
+            </div>
+        </div>
+    </div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+
+        new Vue({
+            el: '#app',
+            data: {
+                place: '请输入待办事项',
+                inputshow: false,
+                spanishow: false,
+                ishow: false,
+                thing: [],
+                // thing2: [],
+                items: []
+            },
+            methods: {
+                placeholder() {
+                    this.place = ''
+                },
+                add() {
+                    if (!this.thing) {
+                        alert('请输入有效内容')
+                    } else {
+                        // this.thing2 += this.thing
+                        this.ishow = true
+                        this.spanishow = true
+                        // this.items += this.thing
+                        var arritems = this.items
+                        var arrthings = this.thing
+                        this.items = arritems.concat(arrthings)
+                        this.thing = []
+                        // this.place = '请输入待办事项'
+                    }
+                },
+                del(index) {
+                    this.items.splice(index, 1)
+                },
+                clear() {
+                    this.items = []
+                    this.ishow = false
+                },
+                span() {
+                    this.spanishow = false
+                },
+                blur(index) {
+                    this.spanishow = true
+                },
+                blurinput() {
+                    if (!this.thing.length) {
+                        this.place = '请输入待办事项'
+                    }
+                }
+            },
+            watch:{
+                items(a){
+                    console.log(a.length);
+                    if(a.length == 0){
+                        this.ishow = false
+                    }
+                }
+            }
+
+        })
+
+    </script>
+</body>
+
+</html>

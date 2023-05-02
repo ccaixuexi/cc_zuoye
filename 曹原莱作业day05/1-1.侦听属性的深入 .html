@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <button @click="number.count1++">自增按钮</button> 
+        <h2 v-show="ishow">动态显示的标题</h2>
+    </div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                //如果count值是偶数 h2显示 count是奇数 h2隐藏
+                number:{
+                    count1:1,
+                    count2:2,
+                    count3:3,
+                },
+                ishow:true
+            },
+            watch:{
+                //监听count的变化 如果count变化了 执行回调函数
+                // count(newValue,oldValue){  //首先这里不要将watch中的变量名看成函数，这里指的就是data里面的count值，监听的就是这个count对象，不要加this变成this.count
+                //     //这里的a代表newValue，是最新的值；b代表oldValue，是上一次的值；也可以将其修改为newValue和oldValue
+                //     if(newValue%2===0){
+                //         this.ishow = true
+                //     }else{
+                //         this.ishow = false
+                //     }
+                // }
+                number:{
+                    handler:function(newValue){
+                        console.log('count1变了');
+                    if(newValue%2==0){
+                        this.ishow = true
+                    }else{
+                        this.ishow = false
+                    }
+                },
+                immediate:true,
+                deep:true
+                }
+            }
+        })
+
+        /* watch的完整写法是一个对象的形式，如果想要页面一加载就能执行这个回调函数，就需要手动设置handler和immediate */
+    </script>
+</body>
+</html>

@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        html {
+            font-size: 1rem;
+        }
+
+        body {
+            background: rgb(84, 164, 263);
+            background-image: url(./jiguang.jpg);
+            background-size: cover;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        #app {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* 页首区 */
+        .top {
+            width: 100%;
+            margin: 0 auto;
+            text-align: center;
+            margin-bottom: 20px;
+            color: aliceblue;
+            font-style: italic;
+            font-weight: 700;
+            font-size: 5rem;
+            text-shadow: 0.8rem 0.8rem 0.6rem #e9e1e1;
+        }
+
+        /* 页容区 */
+        .content {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* 页左区 */
+        .left {
+            padding: 20px;
+            width: 25%;
+            height: 100vh;
+            background: rgba(211, 211, 211, 0.116);
+        }
+
+        /* 名言 */
+        .mingyan1 {
+            font-size: 1rem;
+            font-style: oblique;
+            font-weight: 700;
+            color: burlywood;
+        }
+
+        .mingyan2 {
+            font-size: 1rem;
+            font-style: oblique;
+            font-weight: 700;
+            color: rgba(245, 144, 13, 0.936);
+        }
+
+
+        /* 星座 */
+
+        .xingzuo {
+            padding-top: 10px;
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: white;
+        }
+
+        .xztop {
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 10px;
+        }
+
+        .xzbox {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .xztext {
+            width: 80%;
+        }
+
+        .score {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .bar-in {
+            height: 20px;
+            border-radius: 15px;
+            background: lightblue
+        }
+
+        .percent {
+            width: 20%;
+            text-align: center;
+            padding-top: 5%;
+        }
+
+        /* 页中区 */
+        .middle {
+            width: 50%;
+            margin: 0 auto;
+        }
+
+        .inputbox {
+            display: flex;
+            justify-content: space-between;
+            margin: 0 auto;
+            padding: 20px;
+            width: 80%;
+            text-align: center;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.123);
+            border-radius: 6px;
+        }
+
+        .text {
+            width: 75%;
+            height: 35px;
+            border-radius: 15px;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom: 2px solid rgb(156, 154, 154);
+        }
+
+        .addbtn {
+            width: 20%;
+            height: 40px;
+            color: white;
+            background: rgb(40, 179, 225);
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nothing {
+            margin: 0 auto;
+            margin-top: 50px;
+            padding: 20px;
+            width: 80%;
+            background: white;
+            border-radius: 6px;
+            font-weight: 700;
+        }
+
+        .todolist {
+            margin: 0 auto;
+            margin-top: 50px;
+            padding: 20px;
+            width: 80%;
+            background: white;
+            border-radius: 6px;
+            font-weight: 700;
+        }
+
+        .todoitem {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px;
+            border-bottom: 1px solid lightgray;
+        }
+
+        .del {
+            width: 10%;
+            height: 30px;
+            background: rgb(40, 179, 225);
+            color: white;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .totalbox {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .clearall {
+            width: 60px;
+            height: 30px;
+            background: rgb(40, 179, 225);
+            color: white;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* 页右区 */
+        .right {
+            width: 25%;
+            height: 100vh;
+            background: rgba(211, 211, 211, 0.116);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 添加区 -->
+    <div id="app">
+        <!-- 页首区 -->
+        <div class="top">
+            <p class="title">To Do List</p>
+        </div>
+        <!-- 页容区 -->
+        <div class="content">
+            <!-- 左区 -->
+            <div class="left">
+                <!-- 名言 -->
+                <div class="mingyan" :value="mingyan">
+                    <p class="mingyan1">{{my}}</p>
+                    <p class="mingyan2">{{trans}}</p>
+                </div>
+                <!-- 星座 -->
+                <div class="xingzuo" :value="xingzuo">
+                    <div class="xztop">
+                        <span class="time">{{time}}</span>
+                        <span class="type">{{type}}</span>
+                        <span class="title">{{xz}}</span>
+                    </div>
+
+                    <div class="xzcontent">
+                        <div class="fortune">
+                            <!-- 总评 -->
+                            <div class="all xzbox">
+                                <div class="xztext">
+                                    <div class="score">
+                                        <span>总评分</span>
+                                        <span>{{fortune_all}}</span>
+                                    </div>
+                                    <div class="bar-out"
+                                        style="width: 100%;height: 20px;border-radius: 15px;background:whitesmoke">
+                                        <div class="bar-in" :style="width1"></div>
+                                    </div>
+                                </div>
+                                <div class="percent">{{index_all}}</div>
+                            </div>
+                            <!-- 爱情 -->
+                            <div class="love xzbox">
+                                <div class="xztext">
+                                    <div class="score">
+                                        <span>爱情</span>
+                                        <span>{{fortune_love}}</span>
+                                    </div>
+                                    <div class="bar-out"
+                                        style="width: 100%;height: 20px;border-radius: 15px;background:whitesmoke">
+                                        <div class="bar-in" :style="width2"></div>
+                                    </div>
+                                </div>
+                                <div class="percent">{{index_love}}</div>
+                            </div>
+                            <!-- 工作 -->
+                            <div class="work xzbox">
+                                <div class="xztext">
+                                    <div class="score">
+                                        <span>工作</span>
+                                        <span>{{fortune_work}}</span>
+                                    </div>
+                                    <div class="bar-out"
+                                        style="width: 100%;height: 20px;border-radius: 15px;background:whitesmoke">
+                                        <div class="bar-in" :style="width3"></div>
+                                    </div>
+                                </div>
+                                <div class="percent">{{index_work}}</div>
+                            </div>
+                            <!-- 钱财 -->
+                            <div class="money xzbox">
+                                <div class="xztext">
+                                    <div class="score">
+                                        <span>钱财</span>
+                                        <span>{{fortune_money}}</span>
+                                    </div>
+                                    <div class="bar-out"
+                                        style="width: 100%;height: 20px;border-radius: 15px;background:whitesmoke">
+                                        <div class="bar-in" :style="width4"></div>
+                                    </div>
+                                </div>
+                                <div class="percent">{{index_money}}</div>
+                            </div>
+                            <!-- 健康 -->
+                            <div class="healthy xzbox">
+                                <div class="xztext">
+                                    <div class="score">
+                                        <span>健康</span>
+                                        <span>{{fortune_health}}</span>
+                                    </div>
+                                    <div class="bar-out"
+                                        style="width: 100%;height: 20px;border-radius: 15px;background:whitesmoke">
+                                        <div class="bar-in" :style="width5"></div>
+                                    </div>
+                                </div>
+                                <div class="percent">{{index_health}}</div>
+                            </div>
+                        </div>
+
+                        <div class="fortunetext">
+                            <p>{{fortunetext_all}}</p>
+                            <p>{{fortunetext_love}}</p>
+                            <p>{{fortunetext_work}}</p>
+                            <p>{{fortunetext_money}}</p>
+                            <p>{{fortunetext_health}}</p>
+                        </div>
+                    </div>
+
+
+                    <div class="lucky">
+                        <span class="luckycolor">{{luckycolor}}</span>
+                        <span class="luckyconstellation">{{luckyconstellation}}</span>
+                        <span class="luckynumber">{{luckynumber}}</span>
+                    </div>
+                    <p class="shortcomment">{{shortcomment}}</p>
+                    <div class="todo">
+                        <div class="yi">{{yi}}</div>
+                        <div class="ji">{{ji}}</div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- 中区 -->
+            <div class="middle">
+                <div class="inputbox">
+                    <input type="text" class="text" v-bind:placeholder="place" @blur="blurinput" @click="placeholder"
+                        v-model.trim="thing"><!-- v-show="!inputshow" -->
+                    <!-- <input type="text" class="text" v-model.trim="thing" v-show="inputshow" > -->
+                    <button class="addbtn" @click="add">添加</button>
+                </div>
+
+                <!-- 无事区 -->
+                <div class="nothing" v-show="!ishow">
+                    <p>暂无代办事项</p>
+                </div>
+
+                <!-- 待办区 -->
+                <div class="todolist" v-show="ishow">
+                    <div class="todoitem" v-for="(item,index) in items">
+                        <!-- <input type="text" v-bind:value="item"><button @click="del(index)" class="del">点我删除这条数据</button> -->
+                        <span v-show="spanishow" @click="span">{{item}}</span>
+                        <input type="text" v-model="items[index]" v-show="!spanishow" @blur="blur">
+                        <button @click="del(index)" class="del" v-show="spanishow">删除</button>
+                        <!-- {{item}}<button @click="del(index)" class="del">点我删除这条数据</button> -->
+                    </div>
+                    <div class="totalbox">
+                        <span>共计待办任务{{items.length}}项</span><button @click="clear" class="clearall"
+                            v-show="ishow">全部清除</button>
+                    </div>
+                </div>
+            </div>
+            <!-- 右区 -->
+            <div class="right">
+
+            </div>
+        </div>
+
+
+    </div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <!-- 引入vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <!-- 引入axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+    <!-- 引入Jsonp请求 -->
+    <!-- JSONP：JSONP是一种使用script标签来获取跨域数据的方法。您可以将请求URL包装在一个回调函数中，服务器会将数据包装在回调函数中返回，浏览器就可以通过回调函数来获取数据。JSONP只能用于GET请求。例如，您可以将以下代码添加到HTML文档中 -->
+    <!-- <script>
+        // 定义回调函数
+        function handleResponse(response) {
+          console.log(response);
+        }
+    
+        // 创建<script>标签，并设置src属性为请求地址
+        const apiUrl = 'https://api.vvhan.com/api/horoscope?type=cancer&time=today';
+        const script = document.createElement('script');
+        script.src = apiUrl + '&callback=handleResponse';
+    
+        // 将<script>标签添加到文档中
+        document.body.appendChild(script);
+      </script> -->
+
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
+    <script>
+
+        new Vue({
+            el: '#app',
+            data: {
+                place: '请输入待办事项',
+                inputshow: false,
+                spanishow: false,
+                ishow: false,
+                thing: [],
+                // thing2: [],
+                items: [],
+
+                /* 名言 */
+                my: '',
+                trans: '',
+
+                /* 星座 */
+                time: '',
+                type: '',
+                xz: '',
+
+                fortune_all: '',
+                fortune_love: '',
+                fortune_work: '',
+                fortune_money: '',
+                fortune_health: '',
+                index_all: '',
+                index_love: '',
+                index_work: '',
+                index_money: '',
+                index_health: '',
+                fortunetext_all: '',
+                fortunetext_love: '',
+                fortunetext_work: '',
+                fortunetext_money: '',
+                fortunetext_health: '',
+
+                width1: "",
+                width2: "",
+                width3: "",
+                width4: "",
+                width5: "",
+
+                luckycolor: '',
+                luckyconstellation: '',
+                luckynumber: '',
+                shortcomment: '',
+                yi: '',
+                ji: '',
+            },
+            methods: {
+                placeholder() {
+                    this.place = ''
+                },
+                add() {
+                    if (!this.thing) {
+                        alert('请输入有效内容')
+                    } else {
+                        // this.thing2 += this.thing
+                        this.ishow = true
+                        this.spanishow = true
+                        // this.items += this.thing
+                        var arritems = this.items
+                        var arrthings = this.thing
+                        this.items = arritems.concat(arrthings)
+                        this.thing = []
+                        // this.place = '请输入待办事项'
+                    }
+                },
+                del(index) {
+                    this.items.splice(index, 1)
+                },
+                clear() {
+                    this.items = []
+                    this.ishow = false
+                },
+                span() {
+                    this.spanishow = false
+                },
+                blur(index) {
+                    this.spanishow = true
+                },
+                blurinput() {
+                    if (!this.thing.length) {
+                        this.place = '请输入待办事项'
+                    }
+                }
+            },
+            computed: {
+                async mingyan() {
+                    const res = await axios.get('https://api.vvhan.com/api/en')
+                    console.log(res.data.data);
+                    this.my = res.data.data.en;
+                    this.trans = res.data.data.zh;
+                },
+                async xingzuo() {
+                    const res = await axios.get('https://api.vvhan.com/api/horoscope?type=cancer&time=today')
+                    console.log(res.data.data);
+                    this.time = res.data.data.time;
+                    this.type = res.data.data.type;
+                    this.xz = res.data.data.title;
+
+                    this.fortune_all = res.data.data.fortune.all;
+                    this.fortune_love = res.data.data.fortune.love;
+                    this.fortune_work = res.data.data.fortune.work;
+                    this.fortune_money = res.data.data.fortune.money;
+                    this.fortune_health = res.data.data.fortune.health;
+
+                    this.index_all = res.data.data.index.all;
+                    this.index_love = res.data.data.index.love;
+                    this.index_work = res.data.data.index.work;
+                    this.index_money = res.data.data.index.money;
+                    this.index_health = res.data.data.index.health;
+
+                    // this.width1 = res.data.data.index.all
+                    // this.width2 = res.data.data.index.love
+                    // this.width3 = res.data.data.index.work
+                    // this.width4 = res.data.data.index.money
+                    // this.width5 = res.data.data.index.health
+
+                    this.width1 = 'width:'+ res.data.data.index.all
+                    this.width2 = 'width:'+ res.data.data.index.love
+                    this.width3 = 'width:'+ res.data.data.index.work
+                    this.width4 = 'width:'+ res.data.data.index.money
+                    this.width5 = 'width:'+ res.data.data.index.health
+
+                    this.fortunetext_all = res.data.data.fortunetext.all;
+                    this.fortunetext_love = res.data.data.fortunetext.love;
+                    this.fortunetext_work = res.data.data.fortunetext.work;
+                    this.fortunetext_money = res.data.data.fortunetext.money;
+                    this.fortunetext_health = res.data.data.fortunetext.health;
+
+                    this.luckycolor = res.data.data.luckycolor;
+                    this.luckyconstellation = res.data.data.luckyconstellation;
+                    this.luckynumber = res.data.data.luckynumber;
+                    this.shortcomment = res.data.data.shortcomment;
+                    this.yi = res.data.data.yi;
+                    this.ji = res.data.data.ji;
+                }
+            },
+            watch: {
+                items(a) {
+                    console.log(a.length);
+                    if (a.length == 0) {
+                        this.ishow = false
+                    }
+                }
+            }
+
+        })
+
+    </script>
+</body>
+
+</html>

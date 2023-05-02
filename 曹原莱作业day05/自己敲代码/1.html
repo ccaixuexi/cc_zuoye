@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="count++">自增按钮</button>
+        <h2 v-show="ishow">这是一个动态显示的标题</h2>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data:{
+                count:1,
+                ishow:false
+            },
+            watch:{
+                count:{
+                    handler:function(newValue){
+                    if(newValue%2==0){  /* 注意这里使用的时候不要用count，而是用newValue，并且括号里要写上引用的newValue变量 */
+                        this.ishow = true
+                    }else{
+                        this.ishow =false
+                    }
+                },
+                immediate:true,/* 不加上立即执行immediate时，页面加载不会执行count函数，如果此时有其他函数加了immediate，则会执行那个函数 */
+                },
+            }
+        })
+    </script>
+</body>
+
+</html>

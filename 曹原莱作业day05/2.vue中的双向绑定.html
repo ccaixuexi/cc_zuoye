@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- v-mode指令可以实现表单元素的双向数据绑定，因为只有表单元素才存在输入，所以能够实现双向绑定，其他大部分元素都是用来展示的 -->
+        <input type="text" v-model:value="msg">
+        <input type="text" v-model="msg">
+
+        <!-- 敲警钟！这里是model而不是modle -->
+
+        <!-- 这两种写法都是对的，由于v-modle一般绑定的就是value属性，所以可以将value省略掉 -->
+        <h2>{{msg}}</h2>
+    </div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                msg:'hello'
+            },
+        })
+
+    </script>
+</body>
+</html>

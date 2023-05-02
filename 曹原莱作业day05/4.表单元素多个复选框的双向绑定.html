@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 多个复选框可以将checked设置为一个数组,必须设置好每一个input的value值 -->
+        <input type="checkbox" value="peiqi" v-model="checked" >
+        <label>peiqi </label>
+        <input type="checkbox" value="qiaozhi" v-model="checked" >
+        <label>qiaozhi </label>
+        <input type="checkbox" value="suxi" v-model="checked" >
+        <label>suxi </label>
+        <h2>{{checked}}</h2>
+    </div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                checked:[]
+            },
+        })
+
+    </script>
+</body>
+</html>

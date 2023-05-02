@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id='app'>
+        姓:<input type="text" v-model="firstName">
+        名:<input type="text" v-model="lastName">
+        姓名：<input type="text" v-model="fullName">
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                firstName: '',
+                lastName: '',
+                // fullName: ''  这个不需要了，因为下面会用get得到一个用firstName和lastName返回值
+            },
+            computed: {  /* 这里可不是watch */
+                fullName: {
+                    get: function () {
+                        return this.firstName + this.lastName
+                    },
+                    set: function (value) {
+                        // this.firstName = this.value.slice(0,1)  第二个this不需要加
+                        // this.lastName = this.value.slice(1)  第二个this不需要加
+                        this.firstName = value.slice(0, 1)
+                        this.lastName = value.slice(1)
+                    }
+                }
+            }
+        })
+
+        /* 利用computed计算属性加上get获取值和set触发函数，实现了fullName同firstName和lastName的双向监听，get可以根据firstName以及lastName的值的变化来改变fullName的值，set则可以当fullName的值改变时触发函数重新给firstName和lastName赋值*/
+        
+        /* 以上代码中，`computed` 对象中的 `fullName` 属性被定义为一个计算属性。计算属性是依赖于其他属性值的属性，当依赖的属性发生变化时，计算属性也会被重新计算。
+                在这里，`fullName` 计算属性使用了一个 `get` 方法和一个 `set` 方法。当用户在页面中输入 `fullName` 的值时，`set` 方法将被触发。在 `set` 方法中，我们将输入的 `value` 字符串进行拆分，将第一个字符作为 `firstName` 的值，将其余字符作为 `lastName` 的值。因此，当 `set` 方法被调用时，`firstName` 和 `lastName` 的值也将被相应地更新。
+                在 `get` 方法中，`fullName` 计算属性返回 `firstName` 和 `lastName` 的组合值。因此，当 `firstName` 或 `lastName` 的值发生更改时，`fullName` 的值也将相应地被重新计算并更新。 
+                总之，这段代码利用 `computed` 的计算属性特性，通过 `get` 和 `set` 方法监听 `fullName` 的变化，实现了在页面中输入 `fullName` 后，自动更新 `firstName` 和 `lastName` 的值的效果。 */
+    </script>
+</body>
+
+</html>

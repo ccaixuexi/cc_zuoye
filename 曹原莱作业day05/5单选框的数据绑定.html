@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 单选框可以将同一个值绑定到多个单选框，必须设置value值 -->
+        <input type="radio" value="男" v-model="picked">
+        <label>男</label>
+        <input type="radio" value="女" v-model="picked">
+        <label>女</label>
+        <h2>{{picked}}</h2>
+    </div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                picked:''
+            },
+        })
+
+    </script>
+</body>
+</html>
