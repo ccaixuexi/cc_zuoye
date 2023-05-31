@@ -1,0 +1,1 @@
+export const GaoDe_KEY = 'aa3447ce6cdc47d67526a00bc39575c1'
